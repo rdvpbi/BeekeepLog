@@ -55,45 +55,45 @@ class SeedCallback @Inject constructor(
         val day = 86_400_000L
 
         val queens = listOf(
-            // LAYING Q01–Q12
+            // LAYING Q01–Q12 — genetics/line per spec 6.2-6.4 + IntentExtractor spec 7.5
             queen("Q01", "CARNICA",    "Альфа",        "LAYING", "ACTIVE", 1,  now - 30*day, now),
-            queen("Q02", "BUCKFAST",   "Тройзек 1075", "LAYING", "ACTIVE", 2,  now - 28*day, now),
+            queen("Q02", "CARNICA",    "Тройзек 1075", "LAYING", "ACTIVE", 2,  now - 28*day, now),
             queen("Q03", "MELLIFERA",  null,            "LAYING", "ACTIVE", 3,  now - 25*day, now),
             queen("Q04", "CARNICA",    "Скленар",       "LAYING", "ACTIVE", 4,  now - 22*day, now),
             queen("Q05", "CARPATHICA", null,            "LAYING", "ACTIVE", 5,  now - 20*day, now),
             queen("Q06", "ITALIANA",   "Кордован",      "LAYING", "ACTIVE", 6,  now - 18*day, now),
-            queen("Q07", "BUCKFAST",   "Пешец",         "LAYING", "ACTIVE", 7,  now - 15*day, now),
-            queen("Q08", "CARNICA",    "Вучковская",    "LAYING", "ACTIVE", 8,  now - 12*day, now),
+            queen("Q07", "CARNICA",    "Пешец",         "LAYING", "ACTIVE", 7,  now - 15*day, now),
+            queen("Q08", "CARPATHICA", "Вучковская",    "LAYING", "ACTIVE", 8,  now - 12*day, now),
             queen("Q09", "ITALIANA",   "Кордован",      "LAYING", "ACTIVE", 21, now - 10*day, now, isElite = true),
             queen("Q10", "MELLIFERA",  null,            "LAYING", "ACTIVE", 22, now -  9*day, now),
             queen("Q11", "CARNICA",    "Альфа",         "LAYING", "ACTIVE", 41, now -  8*day, now, isReserved = true),
             queen("Q12", "BUCKFAST",   "Б-24",          "LAYING", "ACTIVE", 42, now -  7*day, now),
 
             // VIRGIN Q13–Q22
-            queen("Q13", "CARNICA",    "Элгон",         "VIRGIN", "ACTIVE", 9,  now - 14*day, now),
-            queen("Q14", "BUCKFAST",   "Тройзек 1075",  "VIRGIN", "ACTIVE", 10, now - 12*day, now),
+            queen("Q13", "BUCKFAST",   "Элгон",         "VIRGIN", "ACTIVE", 9,  now - 14*day, now),
+            queen("Q14", "CARNICA",    "Тройзек 1075",  "VIRGIN", "ACTIVE", 10, now - 12*day, now),
             queen("Q15", "MELLIFERA",  null,            "VIRGIN", "ACTIVE", 11, now - 10*day, now, aggressionScore = 5),
-            queen("Q16", "CARNICA",    "Анатолика",     "VIRGIN", "ACTIVE", 12, now -  9*day, now),
+            queen("Q16", "BUCKFAST",   "Анатолика",     "VIRGIN", "ACTIVE", 12, now -  9*day, now),
             queen("Q17", "CARPATHICA", null,            "VIRGIN", "ACTIVE", 13, now -  8*day, now),
             queen("Q18", "CARNICA",    "Скленар",       "VIRGIN", "ACTIVE", 23, now - 16*day, now),
             queen("Q19", "ITALIANA",   "Кордован",      "VIRGIN", "ACTIVE", 24, now -  6*day, now),
-            queen("Q20", "BUCKFAST",   "Пешец",         "VIRGIN", "ACTIVE", 43, now -  5*day, now),
+            queen("Q20", "CARNICA",    "Пешец",         "VIRGIN", "ACTIVE", 43, now -  5*day, now),
             queen("Q21", "MELLIFERA",  null,            "VIRGIN", "ACTIVE", 44, now -  4*day, now),
-            queen("Q22", "CARNICA",    "Вучковская",    "VIRGIN", "ACTIVE", 45, now -  3*day, now),
+            queen("Q22", "CARPATHICA", "Вучковская",    "VIRGIN", "ACTIVE", 45, now -  3*day, now),
 
             // CELL Q23–Q30
-            queen("Q23", "CARNICA",    "Элгон",         "CELL",   "ACTIVE", 14, now -  5*day, now),
+            queen("Q23", "BUCKFAST",   "Элгон",         "CELL",   "ACTIVE", 14, now -  5*day, now),
             queen("Q24", "BUCKFAST",   "Б-24",          "CELL",   "ACTIVE", 15, now -  4*day, now),
             queen("Q25", "MELLIFERA",  null,            "CELL",   "ACTIVE", 31, now -  3*day, now),
             queen("Q26", "CARPATHICA", null,            "CELL",   "ACTIVE", 32, now -  2*day, now),
-            queen("Q27", "CARNICA",    "Анатолика",     "CELL",   "ACTIVE", 33, now -  1*day, now),
+            queen("Q27", "BUCKFAST",   "Анатолика",     "CELL",   "ACTIVE", 33, now -  1*day, now),
             queen("Q28", "ITALIANA",   "Кордован",      "CELL",   "ACTIVE", 34, now,          now),
-            queen("Q29", "BUCKFAST",   "Тройзек 1075",  "CELL",   "ACTIVE", 35, now,          now),
+            queen("Q29", "CARNICA",    "Тройзек 1075",  "CELL",   "ACTIVE", 35, now,          now),
             queen("Q30", "MELLIFERA",  null,            "CELL",   "ACTIVE", 46, now,          now),
 
             // SOLD Q31–Q33
             queen("Q31", "CARNICA",    "Скленар",       "LAYING", "SOLD",   null, now - 20*day, now - 10*day),
-            queen("Q32", "BUCKFAST",   "Тройзек 1075",  "LAYING", "SOLD",   null, now - 18*day, now -  8*day),
+            queen("Q32", "CARNICA",    "Тройзек 1075",  "LAYING", "SOLD",   null, now - 18*day, now -  8*day),
             queen("Q33", "MELLIFERA",  null,            "VIRGIN", "SOLD",   null, now - 15*day, now -  5*day),
 
             // LOST Q34–Q35
