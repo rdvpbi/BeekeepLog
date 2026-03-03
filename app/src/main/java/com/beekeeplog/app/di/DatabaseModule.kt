@@ -29,6 +29,7 @@ object DatabaseModule {
         seedCallback: SeedCallback
     ): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, "beekeeplog.db")
+            .fallbackToDestructiveMigration()
             .addCallback(seedCallback)
             .build()
 

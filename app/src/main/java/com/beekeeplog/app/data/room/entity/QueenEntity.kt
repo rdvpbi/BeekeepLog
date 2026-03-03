@@ -33,7 +33,19 @@ data class QueenEntity(
     val isReserved: Boolean,
 
     @ColumnInfo(name = "aggression_score")
-    val aggressionScore: Int,
+    val aggressionScore: Int?,
+
+    @ColumnInfo(name = "mother_id")
+    val motherId: String? = null,
+
+    @ColumnInfo(name = "stage_changed_at")
+    val stageChangedAt: Long? = null,
+
+    @ColumnInfo(name = "quality_notes")
+    val qualityNotes: String? = null,
+
+    @ColumnInfo(name = "color_mark")
+    val colorMark: String? = null,
 
     @ColumnInfo(name = "created_at")
     val createdAt: Long,

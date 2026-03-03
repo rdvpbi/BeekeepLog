@@ -15,11 +15,14 @@ data class NucEntity(
     val sector: String,
 
     @ColumnInfo(name = "row")
-    val row: Int,
+    val row: String?,
 
     @ColumnInfo(name = "position")
-    val position: Int,
+    val position: String?,
 
     @ColumnInfo(name = "current_queen_id")
-    val currentQueenId: String?
+    val currentQueenId: String?,
+
+    @ColumnInfo(name = "notes")
+    val notes: String? = null
 )

@@ -17,6 +17,21 @@ data class InspectionSessionEntity(
     @ColumnInfo(name = "started_at")
     val startedAt: Long,
 
-    @ColumnInfo(name = "finished_at")
-    val finishedAt: Long?
+    @ColumnInfo(name = "ended_at")
+    val endedAt: Long? = null,
+
+    @ColumnInfo(name = "pause_split_ms")
+    val pauseSplitMs: Long? = null,
+
+    @ColumnInfo(name = "language_tag")
+    val languageTag: String = "ru-RU",
+
+    @ColumnInfo(name = "segments_total")
+    val segmentsTotal: Int = 0,
+
+    @ColumnInfo(name = "segments_ok")
+    val segmentsOk: Int = 0,
+
+    @ColumnInfo(name = "segments_failed")
+    val segmentsFailed: Int = 0
 )

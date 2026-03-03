@@ -27,12 +27,30 @@ interface QueenDao {
     @Query("SELECT * FROM queens WHERE id = :id")
     suspend fun getById(id: String): QueenEntity?
 
-    @Query("SELECT * FROM queens WHERE nuc_id = :nucId LIMIT 1")
+    @Query("SELECT * FROM queens WHERE nuc_id = :nucId AND lifecycle_status = 'ACTIVE' LIMIT 1")
     suspend fun getByNucId(nucId: Int): QueenEntity?
 
     @Query("UPDATE queens SET stage = :stage, updated_at = :updatedAt WHERE id = :queenId")
     suspend fun updateStage(queenId: String, stage: String, updatedAt: Long)
 
+    @Query("UPDATE queens SET stage_changed_at = :changedAt, updated_at = :changedAt WHERE id = :queenId")
+    suspend fun updateStageChangedAt(queenId: String, changedAt: Long)
+
     @Query("UPDATE queens SET lifecycle_status = :status, updated_at = :updatedAt WHERE id = :queenId")
     suspend fun updateLifecycleStatus(queenId: String, status: String, updatedAt: Long)
+
+    @Query("UPDATE queens SET is_elite = :isElite, updated_at = :updatedAt WHERE id = :queenId")
+    suspend fun updateElite(queenId: String, isElite: Boolean, updatedAt: Long)
+
+    @Query("UPDATE queens SET is_reserved = :isReserved, updated_at = :updatedAt WHERE id = :queenId")
+    suspend fun updateReserved(queenId: String, isReserved: Boolean, updatedAt: Long)
+
+    @Query("UPDATE queens SET aggression_score = :score, updated_at = :updatedAt WHERE id = :queenId")
+    suspend fun updateAggression(queenId: String, score: Int, updatedAt: Long)
+
+    @Query("UPDATE queens SET quality_notes = :notes, updated_at = :updatedAt WHERE id = :queenId")
+    suspend fun updateQualityNotes(queenId: String, notes: String, updatedAt: Long)
+
+    @Query("SELECT DISTINCT line_name FROM queens WHERE line_name IS NOT NULL ORDER BY line_name ASC")
+    suspend fun getDistinctLines(): List<String>
 }

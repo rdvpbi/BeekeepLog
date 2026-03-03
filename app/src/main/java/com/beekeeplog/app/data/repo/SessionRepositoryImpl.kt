@@ -21,12 +21,14 @@ class SessionRepositoryImpl @Inject constructor(
     override suspend fun getSessionById(id: String): InspectionSessionEntity? = sessionDao.getById(id)
     override suspend fun getActiveSession(): InspectionSessionEntity? = sessionDao.getActiveSession()
 
-    override suspend fun insertSegment(segment: InspectionSegmentEntity): Long = segmentDao.insert(segment)
+    override suspend fun insertSegment(segment: InspectionSegmentEntity) = segmentDao.insert(segment)
     override suspend fun updateSegment(segment: InspectionSegmentEntity) = segmentDao.update(segment)
     override fun getSegmentsBySession(sessionId: String): Flow<List<InspectionSegmentEntity>> =
         segmentDao.getBySessionFlow(sessionId)
+    override suspend fun getLastPendingSegment(sessionId: String): InspectionSegmentEntity? =
+        segmentDao.getLastPendingForSession(sessionId)
 
-    override suspend fun insertEvent(event: EventEntity): Long = eventDao.insert(event)
+    override suspend fun insertEvent(event: EventEntity) = eventDao.insert(event)
     override fun getEventsBySession(sessionId: String): Flow<List<EventEntity>> =
         eventDao.getBySessionFlow(sessionId)
 }

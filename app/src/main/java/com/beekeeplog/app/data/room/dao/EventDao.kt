@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.Flow
 interface EventDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(event: EventEntity): Long
+    suspend fun insert(event: EventEntity)
 
-    @Query("SELECT * FROM events WHERE session_id = :sessionId ORDER BY created_at ASC")
+    @Query("SELECT * FROM events WHERE session_id = :sessionId ORDER BY ts ASC")
     fun getBySessionFlow(sessionId: String): Flow<List<EventEntity>>
 
-    @Query("SELECT * FROM events ORDER BY created_at DESC LIMIT :limit")
+    @Query("SELECT * FROM events ORDER BY ts DESC LIMIT :limit")
     suspend fun getRecent(limit: Int): List<EventEntity>
 }

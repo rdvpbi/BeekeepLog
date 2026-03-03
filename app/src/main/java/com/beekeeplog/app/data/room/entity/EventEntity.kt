@@ -7,12 +7,15 @@ import androidx.room.PrimaryKey
 /** Room entity for the `events` table. Append-only audit journal entry. */
 @Entity(tableName = "events")
 data class EventEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long = 0,
+    val id: String,
 
     @ColumnInfo(name = "session_id")
     val sessionId: String?,
+
+    @ColumnInfo(name = "segment_id")
+    val segmentId: String? = null,
 
     @ColumnInfo(name = "event_type")
     val eventType: String,
@@ -20,6 +23,6 @@ data class EventEntity(
     @ColumnInfo(name = "payload_json")
     val payloadJson: String,
 
-    @ColumnInfo(name = "created_at")
-    val createdAt: Long
+    @ColumnInfo(name = "ts")
+    val ts: Long
 )

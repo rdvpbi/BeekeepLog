@@ -10,10 +10,15 @@ data class VoiceUiState(
     val phase: VoicePhase = VoicePhase.IDLE,
     val mode: VoiceMode = VoiceMode.RECORD,
     val currentNucId: Int? = null,
-    val partialText: String = "",
-    val pendingIntent: IntentResult? = null,
-    val sessionId: String? = null,
-    val alerts: List<AlertItem> = emptyList(),
-    val rmsLevel: Float = 0f,
-    val errorMessage: String? = null
+    val streamingText: String = "",
+    val recognizedText: String = "",
+    val recognizedIntent: IntentResult? = null,
+    val recognizedEntities: Map<String, Any?> = emptyMap(),
+    val rmsValues: List<Float> = List(12) { 0f },
+    val confidence: Float = 0f,
+    val sessionDurationSec: Int = 0,
+    val answerText: String = "",
+    val errorText: String = "",
+    val todayAlerts: List<AlertItem> = emptyList(),
+    val sessionId: String? = null
 )

@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 /** Room entity for the `tasks` table. Represents a scheduled beekeeper task. */
 @Entity(tableName = "tasks")
 data class TaskEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long = 0,
+    val id: String,
 
     @ColumnInfo(name = "nuc_id")
     val nucId: Int,
@@ -20,11 +20,17 @@ data class TaskEntity(
     @ColumnInfo(name = "task_type")
     val taskType: String,
 
-    @ColumnInfo(name = "due_date")
-    val dueDate: Long,
+    @ColumnInfo(name = "due_at")
+    val dueAt: Long,
 
-    @ColumnInfo(name = "is_done")
-    val isDone: Boolean,
+    @ColumnInfo(name = "is_completed")
+    val isCompleted: Boolean,
+
+    @ColumnInfo(name = "completed_at")
+    val completedAt: Long? = null,
+
+    @ColumnInfo(name = "description")
+    val description: String? = null,
 
     @ColumnInfo(name = "created_at")
     val createdAt: Long

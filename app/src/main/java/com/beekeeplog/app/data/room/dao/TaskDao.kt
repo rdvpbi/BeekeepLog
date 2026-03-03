@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(task: TaskEntity): Long
+    suspend fun insert(task: TaskEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(tasks: List<TaskEntity>)
@@ -21,15 +21,18 @@ interface TaskDao {
     @Update
     suspend fun update(task: TaskEntity)
 
-    @Query("SELECT * FROM tasks ORDER BY due_date ASC")
+    @Query("SELECT * FROM tasks ORDER BY due_at ASC")
     fun getAllFlow(): Flow<List<TaskEntity>>
 
-    @Query("SELECT * FROM tasks WHERE nuc_id = :nucId AND is_done = 0 ORDER BY due_date ASC")
+    @Query("SELECT * FROM tasks WHERE nuc_id = :nucId AND is_completed = 0 ORDER BY due_at ASC")
     fun getPendingByNucFlow(nucId: Int): Flow<List<TaskEntity>>
 
-    @Query("UPDATE tasks SET is_done = 1 WHERE id = :taskId")
-    suspend fun markDone(taskId: Long)
+    @Query("UPDATE tasks SET is_completed = 1, completed_at = :completedAt WHERE id = :taskId")
+    suspend fun markCompleted(taskId: String, completedAt: Long)
 
-    @Query("SELECT * FROM tasks WHERE due_date < :now AND is_done = 0")
+    @Query("SELECT * FROM tasks WHERE due_at < :now AND is_completed = 0")
     suspend fun getOverdue(now: Long): List<TaskEntity>
+
+    @Query("SELECT * FROM tasks WHERE nuc_id = :nucId AND is_completed = 0 ORDER BY due_at ASC LIMIT 1")
+    suspend fun getNextPendingForNuc(nucId: Int): TaskEntity?
 }

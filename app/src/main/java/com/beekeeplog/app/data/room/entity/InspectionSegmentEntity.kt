@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 /** Room entity for the `inspection_segments` table. Represents one parsed voice segment. */
 @Entity(tableName = "inspection_segments")
 data class InspectionSegmentEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long = 0,
+    val id: String,
 
     @ColumnInfo(name = "session_id")
     val sessionId: String,
@@ -30,8 +30,17 @@ data class InspectionSegmentEntity(
     val processStatus: String,
 
     @ColumnInfo(name = "close_reason")
-    val closeReason: String?,
+    val closeReason: String,
 
     @ColumnInfo(name = "created_at")
-    val createdAt: Long
+    val createdAt: Long,
+
+    @ColumnInfo(name = "ended_at")
+    val endedAt: Long? = null,
+
+    @ColumnInfo(name = "entities_json")
+    val entitiesJson: String? = null,
+
+    @ColumnInfo(name = "stt_confidence")
+    val sttConfidence: Float? = null
 )

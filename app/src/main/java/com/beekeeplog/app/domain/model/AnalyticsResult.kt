@@ -2,9 +2,9 @@ package com.beekeeplog.app.domain.model
 
 /** Analytics screen data: KPI values and hive list. */
 data class AnalyticsResult(
-    val totalNucs: Int,
-    val activeQueens: Int,
-    val pendingTasks: Int,
-    val overdueTasks: Int,
-    val hives: List<NucWithQueen>
+    val kpiCount: Int,
+    val kpiLabel: String,
+    val kpiColor: KpiColor,
+    val nucList: List<NucWithQueen>,
+    val availableLines: List<String>
 )

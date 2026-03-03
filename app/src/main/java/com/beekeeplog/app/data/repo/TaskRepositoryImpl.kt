@@ -11,7 +11,8 @@ class TaskRepositoryImpl @Inject constructor(
 ) : TaskRepository {
 
     override fun getAllFlow(): Flow<List<TaskEntity>> = taskDao.getAllFlow()
-    override suspend fun insert(task: TaskEntity): Long = taskDao.insert(task)
-    override suspend fun markDone(taskId: Long) = taskDao.markDone(taskId)
+    override suspend fun insert(task: TaskEntity) { taskDao.insert(task) }
+    override suspend fun markCompleted(taskId: String, completedAt: Long) = taskDao.markCompleted(taskId, completedAt)
     override suspend fun getOverdue(now: Long): List<TaskEntity> = taskDao.getOverdue(now)
+    override suspend fun getNextPendingForNuc(nucId: Int): TaskEntity? = taskDao.getNextPendingForNuc(nucId)
 }

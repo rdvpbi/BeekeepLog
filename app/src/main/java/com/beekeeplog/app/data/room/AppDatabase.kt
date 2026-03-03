@@ -17,7 +17,7 @@ import com.beekeeplog.app.data.room.entity.NucEntity
 import com.beekeeplog.app.data.room.entity.QueenEntity
 import com.beekeeplog.app.data.room.entity.TaskEntity
 
-/** Single Room database for the entire app. Version must be bumped on schema changes. */
+/** Single Room database for the entire app. */
 @Database(
     entities = [
         NucEntity::class,
@@ -27,7 +27,7 @@ import com.beekeeplog.app.data.room.entity.TaskEntity
         InspectionSegmentEntity::class,
         EventEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

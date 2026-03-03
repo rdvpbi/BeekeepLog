@@ -7,5 +7,6 @@ enum class EventType {
     NLP_PARSED,
     DB_APPLIED,
     ERROR,
-    SESSION_STOPPED
+    SESSION_STOPPED,
+    SESSION_CANCELLED
 }

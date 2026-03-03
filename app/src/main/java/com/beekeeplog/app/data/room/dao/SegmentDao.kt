@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface SegmentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(segment: InspectionSegmentEntity): Long
+    suspend fun insert(segment: InspectionSegmentEntity)
 
     @Update
     suspend fun update(segment: InspectionSegmentEntity)
@@ -22,5 +22,8 @@ interface SegmentDao {
     fun getBySessionFlow(sessionId: String): Flow<List<InspectionSegmentEntity>>
 
     @Query("SELECT * FROM inspection_segments WHERE id = :id")
-    suspend fun getById(id: Long): InspectionSegmentEntity?
+    suspend fun getById(id: String): InspectionSegmentEntity?
+
+    @Query("SELECT * FROM inspection_segments WHERE session_id = :sessionId AND process_status = 'PENDING' ORDER BY created_at DESC LIMIT 1")
+    suspend fun getLastPendingForSession(sessionId: String): InspectionSegmentEntity?
 }

@@ -12,10 +12,11 @@ interface SessionRepository {
     suspend fun getSessionById(id: String): InspectionSessionEntity?
     suspend fun getActiveSession(): InspectionSessionEntity?
 
-    suspend fun insertSegment(segment: InspectionSegmentEntity): Long
+    suspend fun insertSegment(segment: InspectionSegmentEntity)
     suspend fun updateSegment(segment: InspectionSegmentEntity)
     fun getSegmentsBySession(sessionId: String): Flow<List<InspectionSegmentEntity>>
+    suspend fun getLastPendingSegment(sessionId: String): InspectionSegmentEntity?
 
-    suspend fun insertEvent(event: EventEntity): Long
+    suspend fun insertEvent(event: EventEntity)
     fun getEventsBySession(sessionId: String): Flow<List<EventEntity>>
 }

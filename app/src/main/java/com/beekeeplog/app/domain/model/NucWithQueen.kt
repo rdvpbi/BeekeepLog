@@ -4,8 +4,8 @@ package com.beekeeplog.app.domain.model
 data class NucWithQueen(
     val nucId: Int,
     val sector: String,
-    val row: Int,
-    val position: Int,
+    val row: String,
+    val position: String,
     val queenId: String?,
     val genetics: Genetics?,
     val lineName: String?,
@@ -13,5 +13,12 @@ data class NucWithQueen(
     val lifecycleStatus: LifecycleStatus?,
     val isElite: Boolean,
     val isReserved: Boolean,
-    val aggressionScore: Int
+    val aggressionScore: Int,
+    val qualityNotes: String?,
+    val colorMark: String?,
+    val createdAt: Long?,
+    val stageChangedAt: Long?,
+    val daysInCurrentStage: Int,
+    val nextTaskDescription: String?,
+    val nextTaskDueAt: Long?
 )
