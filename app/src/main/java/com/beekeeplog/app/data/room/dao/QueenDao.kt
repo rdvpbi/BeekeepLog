@@ -53,4 +53,7 @@ interface QueenDao {
 
     @Query("SELECT DISTINCT line_name FROM queens WHERE line_name IS NOT NULL ORDER BY line_name ASC")
     suspend fun getDistinctLines(): List<String>
+
+    @Query("UPDATE queens SET nuc_id = NULL, updated_at = :updatedAt WHERE id = :queenId")
+    suspend fun clearNucId(queenId: String, updatedAt: Long)
 }

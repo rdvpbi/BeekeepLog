@@ -35,4 +35,10 @@ interface TaskDao {
 
     @Query("SELECT * FROM tasks WHERE nuc_id = :nucId AND is_completed = 0 ORDER BY due_at ASC LIMIT 1")
     suspend fun getNextPendingForNuc(nucId: Int): TaskEntity?
+
+    @Query("UPDATE tasks SET is_completed = 1, completed_at = :completedAt WHERE queen_id = :queenId AND is_completed = 0")
+    suspend fun completeAllForQueen(queenId: String, completedAt: Long)
+
+    @Query("UPDATE tasks SET is_completed = 1, completed_at = :completedAt WHERE nuc_id = :nucId AND task_type = :taskType AND is_completed = 0")
+    suspend fun completeByTypeForNuc(nucId: Int, taskType: String, completedAt: Long)
 }

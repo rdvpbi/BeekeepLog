@@ -181,7 +181,7 @@ class NlpTests {
     @Test fun `extractGenetics carnica line`() {
         val entities = intentExtractor.extractGenetics("матка скленар карника")
         assertEquals("CARNICA", entities["genetics"])
-        assertEquals("скленар", entities["lineName"])
+        assertEquals("Скленар", entities["lineName"])
     }
 
     @Test fun `extractAggression no number returns null`() {
