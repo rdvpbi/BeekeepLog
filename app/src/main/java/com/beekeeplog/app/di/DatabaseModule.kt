@@ -10,6 +10,7 @@ import com.beekeeplog.app.data.room.dao.QueenDao
 import com.beekeeplog.app.data.room.dao.SegmentDao
 import com.beekeeplog.app.data.room.dao.SessionDao
 import com.beekeeplog.app.data.room.dao.TaskDao
+import com.beekeeplog.app.data.room.dao.VoiceNoteDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,4 +40,5 @@ object DatabaseModule {
     @Provides fun provideSessionDao(db: AppDatabase): SessionDao = db.sessionDao()
     @Provides fun provideSegmentDao(db: AppDatabase): SegmentDao = db.segmentDao()
     @Provides fun provideEventDao(db: AppDatabase): EventDao = db.eventDao()
+    @Provides fun provideVoiceNoteDao(db: AppDatabase): VoiceNoteDao = db.voiceNoteDao()
 }

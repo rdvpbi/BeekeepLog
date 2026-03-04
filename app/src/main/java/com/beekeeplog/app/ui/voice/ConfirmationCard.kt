@@ -109,7 +109,17 @@ fun ConfirmationCard(
                 )
             }
 
-            ParseStatus.NONE -> { /* should not appear in CONFIRMING phase */ }
+            ParseStatus.NONE -> {
+                // RAW saved, NLP pipeline is running
+                Label(text = "ОБРАБОТКА...", color = Color.Gray)
+                if (rawText.isNotBlank()) RecognizedText(rawText)
+                Text(
+                    text = "Распознаю...",
+                    color = Color.Gray,
+                    fontSize = 13.sp,
+                    fontFamily = FontFamily.Monospace
+                )
+            }
         }
     }
 }

@@ -10,12 +10,14 @@ import com.beekeeplog.app.data.room.dao.QueenDao
 import com.beekeeplog.app.data.room.dao.SegmentDao
 import com.beekeeplog.app.data.room.dao.SessionDao
 import com.beekeeplog.app.data.room.dao.TaskDao
+import com.beekeeplog.app.data.room.dao.VoiceNoteDao
 import com.beekeeplog.app.data.room.entity.EventEntity
 import com.beekeeplog.app.data.room.entity.InspectionSegmentEntity
 import com.beekeeplog.app.data.room.entity.InspectionSessionEntity
 import com.beekeeplog.app.data.room.entity.NucEntity
 import com.beekeeplog.app.data.room.entity.QueenEntity
 import com.beekeeplog.app.data.room.entity.TaskEntity
+import com.beekeeplog.app.data.room.entity.VoiceNoteEntity
 
 /** Single Room database for the entire app. */
 @Database(
@@ -25,9 +27,10 @@ import com.beekeeplog.app.data.room.entity.TaskEntity
         TaskEntity::class,
         InspectionSessionEntity::class,
         InspectionSegmentEntity::class,
-        EventEntity::class
+        EventEntity::class,
+        VoiceNoteEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -38,4 +41,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun sessionDao(): SessionDao
     abstract fun segmentDao(): SegmentDao
     abstract fun eventDao(): EventDao
+    abstract fun voiceNoteDao(): VoiceNoteDao
 }

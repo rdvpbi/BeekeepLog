@@ -30,5 +30,8 @@ data class VoiceUiState(
     val answerText: String = "",
     val errorText: String = "",
     val todayAlerts: List<AlertItem> = emptyList(),
-    val sessionId: String? = null
+    val sessionId: String? = null,
+
+    /** Epoch ms when the current recording session started (for VoiceNote.tsStart). */
+    val sessionStartMs: Long = 0L
 )
