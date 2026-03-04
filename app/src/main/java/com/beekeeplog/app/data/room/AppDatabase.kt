@@ -27,7 +27,7 @@ import com.beekeeplog.app.data.room.entity.TaskEntity
         InspectionSegmentEntity::class,
         EventEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

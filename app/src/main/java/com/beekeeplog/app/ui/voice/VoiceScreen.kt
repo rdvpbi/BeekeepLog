@@ -1,9 +1,9 @@
 package com.beekeeplog.app.ui.voice
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.app.Activity
 import android.net.Uri
 import android.provider.Settings
 import android.view.WindowManager
@@ -38,7 +38,7 @@ import com.beekeeplog.app.ui.theme.Black
 
 /**
  * Voice screen: 3-zone layout — status bar / recording content + controls / alerts.
- * Keeps the screen on during listening.
+ * Screen stays on while the user is in LISTENING phase.
  */
 @Composable
 fun VoiceScreen(viewModel: VoiceViewModel = hiltViewModel()) {
@@ -46,7 +46,7 @@ fun VoiceScreen(viewModel: VoiceViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val activity = context as? Activity
 
-    // Keep screen on while listening
+    // Keep screen on while recording
     DisposableEffect(uiState.phase) {
         if (uiState.phase == VoicePhase.LISTENING) {
             activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -101,6 +101,7 @@ fun VoiceScreen(viewModel: VoiceViewModel = hiltViewModel()) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 when (uiState.phase) {
+
                     VoicePhase.IDLE -> {
                         Spacer(Modifier.weight(1f))
                         MicButton(
@@ -108,7 +109,8 @@ fun VoiceScreen(viewModel: VoiceViewModel = hiltViewModel()) {
                             onClick = {
                                 val perm = Manifest.permission.RECORD_AUDIO
                                 if (ContextCompat.checkSelfPermission(context, perm) ==
-                                    PackageManager.PERMISSION_GRANTED) {
+                                    PackageManager.PERMISSION_GRANTED
+                                ) {
                                     viewModel.startSession()
                                 } else {
                                     permissionLauncher.launch(perm)
@@ -126,7 +128,8 @@ fun VoiceScreen(viewModel: VoiceViewModel = hiltViewModel()) {
 
                     VoicePhase.LISTENING -> {
                         StreamingTranscript(
-                            text = uiState.streamingText,
+                            rawBuffer = uiState.rawBuffer,
+                            streamingText = uiState.streamingText,
                             mode = uiState.mode,
                             modifier = Modifier.fillMaxWidth()
                         )
@@ -143,14 +146,12 @@ fun VoiceScreen(viewModel: VoiceViewModel = hiltViewModel()) {
                     }
 
                     VoicePhase.CONFIRMING -> {
-                        val intent = uiState.recognizedIntent
-                        if (intent != null) {
-                            ConfirmationCard(
-                                recognizedText = uiState.recognizedText,
-                                intentResult = intent,
-                                currentNucId = uiState.currentNucId
-                            )
-                        }
+                        ConfirmationCard(
+                            rawText = uiState.recognizedText,
+                            intentResult = uiState.recognizedIntent,
+                            currentNucId = uiState.currentNucId,
+                            parseStatus = uiState.parseStatus
+                        )
                         Spacer(Modifier.weight(1f))
                         ConfirmButtons(
                             onCancel = viewModel::cancelIntent,

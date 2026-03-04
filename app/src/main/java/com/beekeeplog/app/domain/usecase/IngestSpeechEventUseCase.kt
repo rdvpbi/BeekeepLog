@@ -7,8 +7,10 @@ import javax.inject.Inject
 
 /**
  * UC-03: Processes a single [SpeechEvent] and returns an updated [VoiceUiState].
- * Partial/Final events update streaming text and detected hive.
- * Rms events update the RMS bar values.
+ *
+ * Partial events update [VoiceUiState.streamingText] (live preview).
+ * Final events append to [VoiceUiState.rawBuffer] (accumulated transcript) and clear streaming.
+ * Rms events update the amplitude bars.
  * Error events set the error text.
  */
 class IngestSpeechEventUseCase @Inject constructor(
@@ -23,15 +25,19 @@ class IngestSpeechEventUseCase @Inject constructor(
                 confidence = event.confidence ?: current.confidence
             )
         }
+
         is SpeechEvent.Final -> {
             val nucId = hiveDetector.detect(event.text)
+            val appended = if (current.rawBuffer.isBlank()) event.text
+                           else "${current.rawBuffer} ${event.text}"
             current.copy(
                 streamingText = "",
-                recognizedText = event.text,
+                rawBuffer = appended,
                 currentNucId = nucId ?: current.currentNucId,
                 confidence = event.confidence ?: current.confidence
             )
         }
+
         is SpeechEvent.Rms -> {
             val normalized = ((event.rmsdB + 2f) / 12f).coerceIn(0f, 1f)
             val newBars = current.rmsValues.toMutableList().also { bars ->
@@ -40,8 +46,7 @@ class IngestSpeechEventUseCase @Inject constructor(
             }
             current.copy(rmsValues = newBars)
         }
-        is SpeechEvent.Error -> {
-            current.copy(errorText = event.message)
-        }
+
+        is SpeechEvent.Error -> current.copy(errorText = event.message)
     }
 }
